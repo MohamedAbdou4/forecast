@@ -1,0 +1,19 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+  creationTimestamp: null
+  name: mycontainerregistry-secret
+  namespace: forecast-app-ns
+spec:
+  encryptedData:
+    .dockerconfigjson: AgAxjRjv5IOmOrc2EPxEJ+GZ45fTNANcFYmpWXESOABMYO3F4ryx1aKGoOkibz97gMjK3k9vy4hcBt2Ulq7wqKO8wft/HqNZF1CA69cnV76VzDpztMeO1UwdGFpzOnILHWRUQluKA10uzGsgJIfkJsv6e4q+AzphC5fHCEuP++anmLlEi8S1M+gZu2XSgqsr+Dgco8L9I2sOJI0S8ONFLkcGqrPBgbl5spKkIuxcJ4wSXx/8lKHZZrTkG1xunEdPsPuVeQahUJvHBm7jPtNaOsrQYB8N+fow/MCkFn4KNlqSczPExrIBT9/j6P3tErooGSxv5yT/cbJmjq1kz4SacQb3iGJiTRbtgsT+i2m468rRYyM9uK+2s36AzKArLPtJuS6ZQBxACR/Xml6fO9L/mDGZCfOJhXs6JGeyYmVgIR0CcrYFrwEJBJuKB/1orfBFExKYavKxe0p/G9J42OkdsMgTbinTCFABtHq5Ub4ncu8gFymiG+op7/lAad+QVOhyq3kmToQu0MhIbgOpEac55Ol8uXXMJhz95ksrvFlGCQ2aigXtoTGvakXgzsqsiKerocqVwE1Irhg46S9eTSA/5eD7VQGpcU8wPYhYHnHb3skUXKs3JmoDPtfOPDmrvFaKOiNVNgLhceTwS8WRtyg8kOJ+Noudag4Tv+2yXiSDEyS5fTOPquMT5jjQ6tmzeCML1aU5eDYu9JyJFHxjOIObyf1VuEfsdIEiaekyWN5SgqwLbjYqVHRO1AsqZJ20lcSKGj6zU6Z+AEQzOOBZcZlu7htpidGLT2NHIYGMpLh2EqnEdFKI+PcxF0pSlenLSel4s9zi/o4JbgdWtpdD9qwIQ+InQEAIPHkwY5x0B8+X22f7fMqCmuRb5RnQumNCr5DZEeJSXBM7gQujSoxRGhPgGcFjUe7Pp7BI1oF4IJI=
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+      creationTimestamp: null
+      name: mycontainerregistry-secret
+      namespace: forecast-app-ns
+    type: kubernetes.io/dockerconfigjson

@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "18000"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "18000"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "18000"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      add_header X-Frame-Options "SAMEORIGIN";
+      add_header X-XSS-Protection "1; mode=block";
+      add_header X-Content-Type-Options "nosniff";
+      add_header Referrer-Policy same-origin;
+      add_header Permissions-Policy "geolocation=(self), camera=(), microphone=()";
+      add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload';
+      add_header Content-Security-Policy "img-src 'self' data:;";
+    nginx.ingress.kubernetes.io/whitelist-source-range: "0.0.0.0/0,197.35.212.72/32,196.221.125.140/32,4.184.73.175/32,20.218.126.24/32"
+  name: shop-brain-app
+  namespace: default
+spec:
+  tls:
+  - hosts:
+    - shopbrain-app-dev.germanywestcentral.cloudapp.azure.com
+    secretName: shopbrain-app-dev-tls    
+  rules:
+  - host: shopbrain-app-dev.germanywestcentral.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: forecast-app-svc-ingress
+            port: 
+              number: 80

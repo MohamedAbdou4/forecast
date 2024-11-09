@@ -1,0 +1,16 @@
+namePrefix: production-
+resources:
+- ../../base
+images:
+- name: shopbrain.azurecr.io/forecast
+  newTag: master-3a6ceb68f2c47b06f4392292eeb2fb15b3d40059
+
+patches:
+- path: ingress.yml
+- path: deployment.yml
+- path: external-service.yml
+- path: acr-credintials.yml
+- path: db-sealedsecret.yml
+- path: HPA.yml
+
+

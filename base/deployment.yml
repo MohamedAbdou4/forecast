@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forecast-app
+  namespace: forecast-app-ns
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: forecast-app
+  template:
+    metadata:
+      labels:
+        app: forecast-app
+    spec:
+      containers:
+        - name: forecast-app-container
+          image: shopbrain.azurecr.io/forecast:master-8a3e9cb9e81af5fe172125e6ed43afb0d3e4f37d
+          resources:
+            limits:
+              cpu: "2"
+              memory: "7Gi"
+            requests:
+              cpu: "1"
+              memory: "3Gi"
+          ports:
+            - name: http-port
+              containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: db-secret
+      imagePullSecrets:
+        - name: mycontainerregistry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forecast-app-svc
+  namespace: forecast-app-ns
+  labels:
+    job: forecast-job
+    app: forecast-app
+spec:
+  selector: 
+    app: forecast-app
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8000

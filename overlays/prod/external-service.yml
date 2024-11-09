@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: forecast-app-svc-ingress
+  namespace: default
+spec:
+  type: ExternalName
+  externalName: production-forecast-app-svc.forecast-app-ns.svc.cluster.local
+  ports:
+  - port: 80
